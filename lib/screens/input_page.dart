@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/calculator_brain.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../helpers/constants.dart';
@@ -18,6 +19,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+
   Gender activeCard;
   int height = 180;
   int weight = 60;
@@ -161,13 +163,14 @@ class _InputPageState extends State<InputPage> {
           BottomButton(
             buttonTitle: 'CALCULATE',
             action: () {
+              CalculatorBrain calculator = CalculatorBrain(height: height, weight: weight);
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (BuildContext context) => ResultsPage(
-              // bmiResult: 'Normal',
-              // interpretation: 'You shoul eat',
-              // resultText: 'Result Text',
+              bmiText: calculator.calculateBMI(),
+              interpretation: calculator.getInterpretation(),
+              resultText: calculator.getResult(),
             ),
           ),
         );
